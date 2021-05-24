@@ -1,0 +1,25 @@
+function validate{{paramInCaps}}({{param}}){
+	var {{param}}List = {{paramList}};
+	var found = {{param}}List.indexOf({{param}});
+	if(found < 0){
+		return false;
+	}else{
+		return true;
+		}
+}
+
+function set{{paramInCaps}}FoundInList(){
+	var {{param}} = context.getVariable("request.queryparam.{{param}}").toUpperCase();
+	if(validate{{paramInCaps}}({{param}}){
+		context.setVariable("is.{{param}}.in.list","yes");
+	}else{
+		context.setVariable("is.{{param}}.in.list","no");
+	}
+}
+
+if(typeof exports ! == 'undefined'){
+	exports.validate{{paramInCaps}} = validate{{paramInCaps}};
+	exports.set{{paramInCaps}}FoundInList = set{{paramInCaps}}FoundInList; 
+}else{
+	set{{paramInCaps}}FoundInList();
+}
